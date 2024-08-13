@@ -1,0 +1,105 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+.header {
+    width: 100%;
+    background-color: #2874f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 181px;
+    height: 70px;
+}
+h2{
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.logo-image {
+    height: 60px;
+    width: 161px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 2px 0 0 2px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 14px;
+    background-color: #fff;
+    border: none;
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-layer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+}
+
+
+.become-seller-button,
+.more-button {
+    /* background-color: #fff; */
+    color: #f8f8f8;
+    padding: 8px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+.login-button{
+    background-color: #fff;
+    color: #2874f0;
+    padding: 6px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    font-size: 17px;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 25px;
+    cursor: pointer;
+}
