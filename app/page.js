@@ -7,11 +7,25 @@ import { IoMdCart } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import Image from 'next/image';  // Import the Image component
+import Link from 'next/link';  // Import Link from Next.js
 import logo from './img/logo.png'; // If the logo is in the img folder inside src
+import { useCart } from '../app/context/cartContext';
 import './page.css';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [itemCount, setitemCount] = useState('')
+  const { cart, removeFromCart } = useCart();
+
+  const Onget = (change)=>{
+    console.log(change);
+ }
+
+  useEffect(() => {
+    console.log(cart.length);
+    setitemCount(cart.length)
+  }, [Onget])
+  
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -36,10 +50,13 @@ export default function Home() {
           <button className="login-button">Login</button>
           <button className="become-seller-button">Become a Seller</button>
           <button className="more-button">More</button>
-          <div className="cart">
-            <IoMdCart size={20} />
-            <span>Cart</span>
-          </div>
+          <Link href="/cart">
+            <div className="cart">
+              <IoMdCart size={20} />
+              <span>Cart</span>
+             {itemCount >=1 ? <span className="cart-count" data-count={itemCount}></span> :''}
+            </div>
+          </Link>
         </div>
       </header>
       
@@ -78,7 +95,7 @@ export default function Home() {
         </aside>
         <div className="products">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} Onchange={Onget}/>
           ))}
         </div>
       </main>

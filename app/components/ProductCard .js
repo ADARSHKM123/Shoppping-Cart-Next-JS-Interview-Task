@@ -1,11 +1,22 @@
 import './ProductCard.css';
 import { useState } from 'react';
+import { useCart } from '../context/cartContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, Onchange }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { addToCart } = useCart();  // Destructure addToCart from useCart
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product);  // Call addToCart from useCart
+
+    // Call Onchange and pass a custom message or the product to indicate success
+    if (Onchange) {
+      Onchange({ product, message: 'Product added to cart successfully' });
+    }
   };
 
   return (
@@ -29,7 +40,10 @@ const ProductCard = ({ product }) => {
         >
           {isExpanded ? 'Less' : 'More'}
         </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full addtocart">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full addtocart"
+          onClick={handleAddToCart}  // Call handleAddToCart on button click
+        >
           Add to Cart
         </button>
       </div>

@@ -1,18 +1,20 @@
 "use client"; 
 
-
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCart } from '../context/cartContext'; // Adjust the import path as needed
+import './page.css'
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
-
-  const removeFromCart = (product) => {
-    setCart(cart.filter((item) => item.id !== product.id));
-  };
+  const { cart, removeFromCart } = useCart();
 
   const getTotal = () => {
-    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
+  
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
+  
 
   return (
     <div className="container mx-auto p-4">
@@ -21,24 +23,46 @@ export default function Cart() {
         <p>Your cart is empty</p>
       ) : (
         <div>
-          <ul>
-            {cart.map((item, index) => (
-              <li key={index} className="mb-4">
-                <img src={item.image} alt={item.name} className="w-20 h-20" />
-                <h2 className="text-xl font-bold">{item.name}</h2>
-                <p className="text-gray-700">${item.price.toFixed(2)}</p>
-                <button
-                  onClick={() => removeFromCart(item)}
-                  className="mt-2 px-4 py-2 bg-red-500 text-white rounded"
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4">
+          <table className="cart-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item, index) => (
+                <tr key={index} className="cart-item">
+                  <td className="cart-item-image">
+                    <img src={item.image} alt={item.name} className="product-image" />
+                  </td>
+                  <td className="cart-item-title">
+                    <h2 className="text-lg font-semibold">{item.title}</h2>
+                  </td>
+                  <td className="cart-item-price">
+                    <p className="text-gray-700">${item.price.toFixed(2)}</p>
+                  </td>
+                  <td className="cart-item-quantity">
+                    <p>{item.quantity}</p>
+                  </td>
+                  <td className="cart-item-remove">
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="remove-btn"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="cart-total mt-4">
             <h2 className="text-xl font-bold">Total: ${getTotal()}</h2>
-            <button className="mt-2 px-4 py-2 bg-green-500 text-white rounded">
+            <button className="checkout-btn">
               Proceed to Checkout
             </button>
           </div>
