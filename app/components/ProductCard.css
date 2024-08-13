@@ -43,10 +43,11 @@
   
   .addtocart {
     display: block;
-    background-color: #2874f0;
+    background-color: #f5e2ca;
     padding: 6px 20px;
-    color: #fefefe;
-    border-radius: 10px;
+    color: #000000;
+    border-radius: 5px;
     margin: 10px 0;
+    font-weight: 500; 
   }
   

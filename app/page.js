@@ -23,7 +23,7 @@ export default function Home() {
     <div className="container mx-auto py-10">
       <header className="header">
         <div className="logo">
-        <FaCartShopping />
+          <FaCartShopping />
           <h2>Splendo</h2>
         </div>
         
@@ -43,8 +43,39 @@ export default function Home() {
         </div>
       </header>
       
-      <main>
-        {/* <h1 className="text-3xl font-bold text-center mb-8">Our Products</h1> */}
+      <main className="main-content">
+        <aside className="filters">
+          <h3>Filters</h3>
+          <div className="filter-category">
+            <h4>Categories</h4>
+            <ul>
+              <li><input type="checkbox" /> Wearable Smart Devices</li>
+              <li><input type="checkbox" /> Smart Watches</li>
+            </ul>
+          </div>
+          <div className="filter-price">
+            <h4>Price</h4>
+            <input type="range" min="0" max="20000" />
+            <div className="price-inputs">
+              <input type="number" placeholder="Min" />
+              <input type="number" placeholder="Max" />
+            </div>
+          </div>
+          <div className="filter-brand">
+            <h4>Brand</h4>
+            <ul>
+              <li><input type="checkbox" /> Brand A</li>
+              <li><input type="checkbox" /> Brand B</li>
+            </ul>
+          </div>
+          <div className="filter-ratings">
+            <h4>Customer Ratings</h4>
+            <ul>
+              <li><input type="checkbox" /> 4★ & above</li>
+              <li><input type="checkbox" /> 3★ & above</li>
+            </ul>
+          </div>
+        </aside>
         <div className="products">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

@@ -1,7 +1,3 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-
 .header {
     width: 100%;
     background-color: #2874f0;
@@ -11,11 +7,13 @@
     padding: 0 181px;
     height: 70px;
 }
-h2{
+
+h2 {
     font-family: "Lato", sans-serif;
     font-weight: 300;
     font-style: normal;
 }
+
 .logo {
     display: flex;
     align-items: center;
@@ -65,10 +63,8 @@ h2{
     color: #fff;
 }
 
-
 .become-seller-button,
 .more-button {
-    /* background-color: #fff; */
     color: #f8f8f8;
     padding: 8px 16px;
     border-radius: 2px;
@@ -76,7 +72,8 @@ h2{
     border: none;
     font-size: 16px;
 }
-.login-button{
+
+.login-button {
     background-color: #fff;
     color: #2874f0;
     padding: 6px 20px;
@@ -96,10 +93,59 @@ h2{
     font-size: 16px;
 }
 
+.main-content {
+    display: flex;
+}
+
+.filters {
+    width: 885px;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+.filters h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.filters h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.filters ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.filters li {
+    margin-bottom: 10px;
+}
+
+.filter-price input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.price-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.price-inputs input {
+    width: 48%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     margin: 25px;
     cursor: pointer;
+    flex-grow: 1;
 }
