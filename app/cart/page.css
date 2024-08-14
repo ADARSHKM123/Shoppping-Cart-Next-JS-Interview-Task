@@ -148,3 +148,48 @@
     font-weight: bold;
   }
   
+
+
+  .discount-section {
+    margin-top: 20px;
+    /* display: flex;
+    align-items: center; */
+  }
+  
+  .discount-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  .discount-btn {
+    background-color: #2874f0;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .discount-btn:hover {
+    background-color: #1a5cbf;
+  }
+  
+  .checkout-message {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(1, 136, 1);
+  }
+  .discount-egs{
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #000;
+  }
+  .checkout-message{
+    margin-bottom: 20px;
+  }

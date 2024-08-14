@@ -1,28 +1,26 @@
 "use client"; 
 
-import { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../context/cartContext'; // Adjust the import path as needed
 import './page.css'
 
 export default function Cart() {
-  const { cart, removeFromCart, updateQuantity } = useCart(); // Assuming updateQuantity is available in your context
+  const { cart, removeFromCart, updateQuantity, applyDiscount, getTotal } = useCart();
+  const [discountCode, setDiscountCode] = useState('');
+  const [checkoutMessage, setCheckoutMessage] = useState('');
 
-  const getTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  };
-  
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
-
-  const increaseQuantity = (item) => {
-    updateQuantity(item.id, item.quantity + 1);
-  };
-
-  const decreaseQuantity = (item) => {
-    if (item.quantity > 1) {
-      updateQuantity(item.id, item.quantity - 1);
+  const handleDiscount = () => {
+    if (discountCode === 'SAVE10') {
+      applyDiscount({ type: 'percentage', value: 10 });
+    } else if (discountCode === 'FIXED10') {
+      applyDiscount({ type: 'fixed', value: 10 });
+    } else {
+      applyDiscount(null);
     }
+  };
+
+  const handleCheckout = () => {
+    setCheckoutMessage('Thank you for your purchase! Your order has been placed.');
   };
 
   return (
@@ -33,53 +31,67 @@ export default function Cart() {
       ) : (
         <div>
           <div className='wholesome'>
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item, index) => (
-                <tr key={index} className="cart-item">
-                  <td className="cart-item-image">
-                    <img src={item.image} alt={item.name} className="product-image" />
-                  </td>
-                  <td className="cart-item-title">
-                    <h2 className="text-lg font-semibold">{item.title}</h2>
-                  </td>
-                  <td className="cart-item-price">
-                    <p className="text-gray-700">${item.price.toFixed(2)}</p>
-                  </td>
-                  <td className="cart-item-quantity">
-                    <div className="quantity-controls">
-                      <button onClick={() => decreaseQuantity(item)} className="quantity-btn">-</button>
-                      <span className="quantity-number">{item.quantity}</span>
-                      <button onClick={() => increaseQuantity(item)} className="quantity-btn">+</button>
-                    </div>
-                  </td>
-                  <td className="cart-item-remove">
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
-                      Remove
-                    </button>
-                  </td>
+            <table className="cart-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Remove</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="cart-total mt-4">
-            <h2 className="text-xl font-bold">Total: ${getTotal()}</h2>
-            <button className="checkout-btn">
-              Proceed to Checkout
-            </button>
-          </div>
+              </thead>
+              <tbody>
+                {cart.map((item, index) => (
+                  <tr key={index} className="cart-item">
+                    <td className="cart-item-image">
+                      <img src={item.image} alt={item.name} className="product-image" />
+                    </td>
+                    <td className="cart-item-title">
+                      <h2 className="text-lg font-semibold">{item.title}</h2>
+                    </td>
+                    <td className="cart-item-price">
+                      <p className="text-gray-700">${item.price.toFixed(2)}</p>
+                    </td>
+                    <td className="cart-item-quantity">
+                      <div className="quantity-controls">
+                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="quantity-btn">-</button>
+                        <span className="quantity-number">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="quantity-btn">+</button>
+                      </div>
+                    </td>
+                    <td className="cart-item-remove">
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="remove-btn"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="cart-total mt-4">
+              <h2 className="text-xl font-bold">Total: ${getTotal()}</h2>
+              
+              <div className="discount-section">
+              <p className="discount-egs">Eg:<span>SAVE10</span></p>
+                <input
+                  type="text"
+                  placeholder="Discount code"
+                  value={discountCode}
+                  onChange={(e) => setDiscountCode(e.target.value)}
+                  className="discount-input"
+                />
+                
+                <button onClick={handleDiscount} className="discount-btn">Apply Discount</button>
+              </div>
+              <button onClick={handleCheckout} className="checkout-btn">
+                Proceed to Checkout
+              </button>
+              {checkoutMessage && <p className="checkout-message">{checkoutMessage}</p>}
+            </div>
           </div>
         </div>
       )}
