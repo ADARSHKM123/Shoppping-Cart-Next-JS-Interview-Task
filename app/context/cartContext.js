@@ -8,6 +8,7 @@ const CartContext = createContext();
 // Define action types
 const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 
 // Create a reducer function
 const cartReducer = (state, action) => {
@@ -20,8 +21,17 @@ const cartReducer = (state, action) => {
         return updatedCart;
       }
       return [...state, { ...action.payload, quantity: 1 }];
+    
     case REMOVE_FROM_CART:
       return state.filter(item => item.id !== action.payload.id);
+
+    case UPDATE_QUANTITY:
+      return state.map(item =>
+        item.id === action.payload.id
+          ? { ...item, quantity: action.payload.quantity }
+          : item
+      );
+
     default:
       return state;
   }
@@ -44,10 +54,14 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: REMOVE_FROM_CART, payload: { id: productId } });
   };
 
+  const updateQuantity = (productId, quantity) => {
+    dispatch({ type: UPDATE_QUANTITY, payload: { id: productId, quantity } });
+  };
+
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, cartCount, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, cartCount, addToCart, removeFromCart, updateQuantity }}>
       {children}
     </CartContext.Provider> 
   );

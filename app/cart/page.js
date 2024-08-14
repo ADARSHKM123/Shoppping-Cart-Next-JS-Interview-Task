@@ -5,7 +5,7 @@ import { useCart } from '../context/cartContext'; // Adjust the import path as n
 import './page.css'
 
 export default function Cart() {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateQuantity } = useCart(); // Assuming updateQuantity is available in your context
 
   const getTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -14,13 +14,22 @@ export default function Cart() {
   useEffect(() => {
     console.log(cart);
   }, [cart]);
-  
+
+  const increaseQuantity = (item) => {
+    updateQuantity(item.id, item.quantity + 1);
+  };
+
+  const decreaseQuantity = (item) => {
+    if (item.quantity > 1) {
+      updateQuantity(item.id, item.quantity - 1);
+    }
+  };
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4 headline_cart">Shopping Cart</h1>
       {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p className='empty_Cart'>Your cart is empty</p>
       ) : (
         <div>
           <div className='wholesome'>
@@ -47,7 +56,11 @@ export default function Cart() {
                     <p className="text-gray-700">${item.price.toFixed(2)}</p>
                   </td>
                   <td className="cart-item-quantity">
-                    <p>{item.quantity}</p>
+                    <div className="quantity-controls">
+                      <button onClick={() => decreaseQuantity(item)} className="quantity-btn">-</button>
+                      <span className="quantity-number">{item.quantity}</span>
+                      <button onClick={() => increaseQuantity(item)} className="quantity-btn">+</button>
+                    </div>
                   </td>
                   <td className="cart-item-remove">
                     <button
