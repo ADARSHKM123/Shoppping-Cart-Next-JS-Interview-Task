@@ -23,9 +23,17 @@ export default function Cart() {
     setCheckoutMessage('Thank you for your purchase! Your order has been placed.');
   };
 
+  const handleUpdateQuantity = (id, newQuantity) => {
+    if (newQuantity === 0) {
+      removeFromCart(id);
+    } else {
+      updateQuantity(id, newQuantity);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 headline_cart">Shopping Cart</h1>
+      {/* <h1 className="text-3xl font-bold mb-4 headline_cart">Shopping Cart</h1> */}
       {cart.length === 0 ? (
         <p className='empty_Cart'>Your cart is empty</p>
       ) : (
@@ -55,9 +63,9 @@ export default function Cart() {
                     </td>
                     <td className="cart-item-quantity">
                       <div className="quantity-controls">
-                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="quantity-btn">-</button>
+                        <button onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)} className="quantity-btn">-</button>
                         <span className="quantity-number">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="quantity-btn">+</button>
+                        <button onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)} className="quantity-btn">+</button>
                       </div>
                     </td>
                     <td className="cart-item-remove">

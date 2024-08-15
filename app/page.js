@@ -3,29 +3,23 @@
 import './styles/globals.css';
 import ProductCard from './components/ProductCard ';
 import { useState, useEffect } from 'react';
-import { IoMdCart } from "react-icons/io";
-import { FaSearch } from "react-icons/fa";
-import { FaCartShopping } from "react-icons/fa6";
-import Image from 'next/image';  // Import the Image component
-import Link from 'next/link';  // Import Link from Next.js
-import logo from './img/logo.png'; // If the logo is in the img folder inside src
-import { useCart } from '../app/context/cartContext';
+import Header from './components/Header'; // Import the Header component
 import './page.css';
+import { useCart } from '../app/context/cartContext';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const [itemCount, setitemCount] = useState('')
+  const [itemCount, setItemCount] = useState(0);  // Corrected the initial value to 0
   const { cart, removeFromCart } = useCart();
-
-  const Onget = (change)=>{
-    console.log(change);
- }
-
-  useEffect(() => {
-    console.log(cart.length);
-    setitemCount(cart.length)
-  }, [Onget])
   
+
+  const Onget = (change) => {
+    console.log(change);
+  };
+ 
+  useEffect(() => {
+    setItemCount(cart.length);
+  }, [cart]);  // Updated the dependency array to cart
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -35,30 +29,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto py-10">
-      <header className="header">
-        <div className="logo">
-          <FaCartShopping />
-          <h2>Splendo</h2>
-        </div>
-        
-        <div className="search-bar">  
-          <input type="text" placeholder="Search for products, brands and more" />
-          <button><FaSearch /></button>
-        </div>
-        
-        <div className="inner-layer">
-          <button className="login-button">Login</button>
-          <button className="become-seller-button">Become a Seller</button>
-          <button className="more-button">More</button>
-          <Link href="/cart">
-            <div className="cart">
-              <IoMdCart size={20} />
-              <span>Cart</span>
-             {itemCount >=1 ? <span className="cart-count" data-count={itemCount}></span> :''}
-            </div>
-          </Link>
-        </div>
-      </header>
+      <Header itemCount={itemCount} /> {/* Use the Header component and pass itemCount as a prop */}
       
       <main className="main-content">
         <aside className="filters">
@@ -95,7 +66,7 @@ export default function Home() {
         </aside>
         <div className="products">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} Onchange={Onget}/>
+            <ProductCard key={product.id} product={product} Onchange={Onget} />
           ))}
         </div>
       </main>

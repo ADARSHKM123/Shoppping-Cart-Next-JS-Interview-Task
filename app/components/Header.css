@@ -1,0 +1,230 @@
+/* Base styles */
+.header {
+    width: 100%;
+    background-color: #2874f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 115px;
+    height: 70px;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+}
+
+h2 {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 20px;
+    justify-content: center; /* Center the search bar */
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 2px 0 0 2px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 14px;
+    background-color: #fff;
+    border: none;
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-layer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+}
+
+.become-seller-button,
+.more-button {
+    color: #f8f8f8;
+    padding: 8px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -13px;
+    right: -10px;
+    background-color: #ff3b3b;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.cart-count::after {
+    content: attr(data-count);
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hamburger Menu Active State */
+.hamburger-menu.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .search-bar {
+       display: none;
+    }
+
+    .search-bar button {
+        display: none; 
+    }
+
+    .logo {
+        order: 1;
+        flex-grow: 1;
+        justify-content: flex-start; /* Align logo to the left */
+    }
+
+    .menu {
+        flex-grow: 1;
+        justify-content: flex-end; /* Align hamburger menu to the right */
+        order: 3;
+    }
+
+    .menu-items {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #2874f0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .header {
+        padding: 0 15px !important;
+        font-size: 15px;
+    }
+    .search-bar button {
+        display: none !important;
+    }
+
+    .search-bar {
+        display: none !important;
+    }
+
+    .search-bar button {
+        display: none !important;
+    }
+
+
+    .search-bar input {
+        display: none;
+    }
+
+    .cart-count {
+        top: -3px !important;
+        right: -14px !important;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+    .become-seller-button,
+    .more-button,
+    .cart{
+        font-size: 20px !important;
+        padding-top: 10px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}

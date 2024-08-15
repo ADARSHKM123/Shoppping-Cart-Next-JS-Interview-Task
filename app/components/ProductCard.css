@@ -84,3 +84,15 @@
 .text-blue-500:hover {
     text-decoration: underline;
 }
+
+
+@media (max-width: 480px) {
+
+    .ImagesBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
+    
+}
