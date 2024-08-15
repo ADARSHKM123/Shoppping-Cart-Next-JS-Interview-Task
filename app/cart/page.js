@@ -56,7 +56,7 @@ export default function Cart() {
                       <img src={item.image} alt={item.name} className="product-image" />
                     </td>
                     <td className="cart-item-title">
-                      <h2 className="text-lg font-semibold">{item.title}</h2>
+                      <h2 className="text-lg font-semibold title-name">{item.title}</h2>
                     </td>
                     <td className="cart-item-price">
                       <p className="text-gray-700">${item.price.toFixed(2)}</p>

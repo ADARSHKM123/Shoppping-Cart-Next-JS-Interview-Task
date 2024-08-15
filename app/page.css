@@ -145,51 +145,10 @@ h2 {
   }
 
 @media (max-width: 768px) {
-    h2 {
-        font-family: "Lato", sans-serif;
-        font-weight: 300;
-        font-style: normal;
-    }
-    
-    .cart {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 16px;
-        position: relative;
-    }
-    
-    .cart-count {
-        background-color: #ff3b3b;
-        color: #fff;
-        border-radius: 50%;
-        padding: 2px 8px;
-        font-size: 12px;
-        font-weight: bold;
-        position: absolute;
-        top: -5px;
-        right: -10px;
-    }
-    
-    .animate-cart {
-        animation: cart-bounce 0.5s ease;
-    }
-    
-    @keyframes cart-bounce {
-        0%, 100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-    }
-    
+
     .main-content {
         display: flex;
-        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        flex-wrap: wrap; 
     }
     
     .filters {
@@ -224,13 +183,13 @@ h2 {
         margin: 10px 0;
     }
     
-    .price-inputs {
+    /* .price-inputs {
         display: flex;
         justify-content: space-between;
         gap: 10px;
-    }
+    } */
     
-    .price-inputs input {
+    /* .price-inputs input {
         width: 48%;
         padding: 5px;
         border: 1px solid #ccc;
@@ -245,12 +204,9 @@ h2 {
         cursor: pointer;
         flex-grow: 1;
         margin-top: 100px;
-    }
+    } */
 
     
-    
-
-
     .filters {
         width: 100%; /* Full width on smaller screens */
         border-right: none; /* Remove border on smaller screens */
