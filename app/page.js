@@ -7,7 +7,7 @@ import Header from './components/Header'; // Import the Header component
 import './page.css';
 import { useCart } from '../app/context/cartContext';
 
-export default function Home() {
+export default function Home()  {
   const [products, setProducts] = useState([]);
   const [itemCount, setItemCount] = useState(0);  // Corrected the initial value to 0
   const { cart, removeFromCart } = useCart();
